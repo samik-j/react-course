@@ -2,15 +2,24 @@ import React from 'react';
 import './App.css';
 import Person from './Person/Person'
 
-function App() {
-  return (
-    <div className="App">
-      <h1>React App</h1>
-        <Person name="llama">And this is inside</Person>
-        <Person name="Person"/>
-    </div>
-  );
+class App extends React.Component {
 
+    state = {
+        entities: [
+            {name: 'llama', movement: 'jumping'},
+            {name: 'person', movement: 'walking'}
+        ]
+    };
+
+    render() {
+        return (
+            <div className="App">
+                <h1>React App</h1>
+                <Person name="llama" movement="jumping">And this is inside</Person>
+                <Person name={this.state.entities[0].name} movement={this.state.entities[0].movement}/>
+            </div>
+        );
+    }
 
   // return (
   //   <div className="App">
