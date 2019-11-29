@@ -6,17 +6,26 @@ class App extends React.Component {
 
     state = {
         entities: [
-            {name: 'llama', movement: 'jumping'},
-            {name: 'person', movement: 'walking'}
+            {name: 'llama', movement: 'jumping', state: 'I am jumping happily'},
         ]
+    };
+
+    switchEntityHandler = () => {
+        const newState = this.state.entities[0].state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
+        this.setState({
+            entities: [
+                {name: 'llama', movement: 'jumping', state: newState},
+            ]
+        })
     };
 
     render() {
         return (
             <div className="App">
                 <h1>React App</h1>
-                <Person name="llama" movement="jumping">And this is inside</Person>
-                <Person name={this.state.entities[0].name} movement={this.state.entities[0].movement}/>
+                <button onClick={this.switchEntityHandler}>Trip or help</button>
+                <Person name="llama">This is inside</Person>
+                <Person name={this.state.entities[0].name}>{this.state.entities[0].state}</Person>
             </div>
         );
     }
