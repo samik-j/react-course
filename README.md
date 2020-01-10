@@ -1,3 +1,6 @@
+Project based on course https://learning.oreilly.com/videos/react-16/9781789132229
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
