@@ -73,10 +73,10 @@ class App extends React.Component {
 			llamas = (
 				<div>
 					<Person name="llama" age={2} color="red">This is inside</Person>
-					<Person name="llama with changeable age" age={this.state.age} color="black" click={this.switchAgeHandler}/>
+					<Person name="llama with changeable age" age={this.state.age} color="black" onClick={this.switchAgeHandler}/>
 					{this.state.entities.map((entity, index) => {
-					return <Person key={entity.id} name={entity.name} age={entity.age} color={entity.color} click={() => this.deleteLlamaHandler(index)}
-								   change={(event) => this.colorChangeLlamaHandler(event, entity.id)}>
+					return <Person key={entity.id} name={entity.name} age={entity.age} color={entity.color} onClick={() => this.deleteLlamaHandler(index)}
+								   onChange={(event) => this.colorChangeLlamaHandler(event, entity.id)}>
 						<button onClick={() => this.switchEntityHandler(entity.id)} style={buttonStyle}>Trip or help</button>
 						<br/>
 						{entity.state}
