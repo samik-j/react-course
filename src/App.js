@@ -98,9 +98,17 @@ class App extends React.Component {
 			buttonStyle.color = 'red';
 		}
 
+    	let style = [];
+    	if(this.state.entities.length <= 2) {
+    		style.push('dark-red')
+    	}
+    	if(this.state.entities.length <= 1) {
+    		style.push('red')
+    	}
+
         return (
             <div className="App">
-                <h1>Llamas</h1>
+                <h1 className={style.join(' ')}>Llamas</h1>
 				<button style={buttonStyle} onClick={this.toggleLlamasHandler}>{this.state.showLlamas ? "Hide Llamas" : "Show Llamas"}</button>
 				{llamas}
             </div>
