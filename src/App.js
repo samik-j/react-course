@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Radium from 'radium'
 import Person from './Person/Person'
 
 class App extends React.Component {
@@ -66,14 +67,23 @@ class App extends React.Component {
 			color: 'green',
 			padding: '8px',
 			margin: '5px',
-			cursor: 'pointer'
+			cursor: 'pointer',
+			// hover and any :sth are pseudo-selectors. To be able to use them in in-line style use radium
+			':hover': {
+				backgroundColor:'green',
+				color: 'white'
+			}
 		};
 
     	const buttonStyle2 = {
 			border: '2px solid black',
 			padding: '8px',
 			margin: '5px',
-			cursor: 'pointer'
+			cursor: 'pointer',
+			':hover': {
+				backgroundColor:'black',
+				color: 'white'
+			}
 		};
 
     	let llamas = null;
@@ -85,7 +95,7 @@ class App extends React.Component {
 					{this.state.entities.map((entity, index) => {
 					return <Person key={entity.id} name={entity.name} age={entity.age} color={entity.color} onClick={() => this.deleteLlamaHandler(index)}
 								   onChange={(event) => this.colorChangeLlamaHandler(event, entity.id)}>
-						<button onClick={() => this.switchEntityHandler(entity.id)} style={buttonStyle2}>Trip or help</button>
+						<button key={entity.id} onClick={() => this.switchEntityHandler(entity.id)} style={buttonStyle2}>Trip or help</button>
 						<br/>
 						{entity.state}
 					</Person>
@@ -96,6 +106,11 @@ class App extends React.Component {
 
 			buttonStyle.border = '2px solid red';
 			buttonStyle.color = 'red';
+			buttonStyle[':hover'] = {
+				backgroundColor: 'red',
+				color: 'white'
+
+			}
 		}
 
     	let style = [];
@@ -128,4 +143,4 @@ class App extends React.Component {
   //     React.createElement('h1', null, 'React App'))
 }
 
-export default App;
+export default Radium(App);
