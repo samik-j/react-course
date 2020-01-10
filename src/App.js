@@ -40,6 +40,13 @@ class App extends React.Component {
 	};
 
     render() {
+    	const buttonStyle = {
+			border: '1px solid black',
+			padding: '8px',
+			margin: '5px',
+			cursor: 'pointer'
+		};
+
         return (
             <div className="App">
                 <h1>React App</h1>
@@ -52,7 +59,7 @@ class App extends React.Component {
                 {/*<Person name="llama with changeable age" age={this.state.age} click={() => this.switchSpecificAgeHandler(4)}/>*/}
                 {/*<Person name="llama with changeable age" age={this.state.age} click={this.switchSpecificAgeHandler.bind(this, 5)}/>*/}
                 <Person name={this.state.entities[0].name} age={this.state.entities[0].age} color={this.state.color}>
-                    <button onClick={this.switchEntityHandler}>Trip or help</button>
+                    <button onClick={this.switchEntityHandler} style={buttonStyle}>Trip or help</button>
                     <br/>
                     {this.state.entities[0].state}
                 </Person>
