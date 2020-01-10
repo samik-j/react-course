@@ -48,23 +48,27 @@ class App extends React.Component {
 			cursor: 'pointer'
 		};
 
+    	let llamas = null;
+    	if (this.state.showLlamas) {
+			llamas = (
+				<div>
+					<Person name="llama" age={2} color={this.state.color}>This is inside</Person>
+					<Person name="llama with changeable age" age={this.state.age} color={this.state.color} click={this.switchAgeHandler}/>
+					<Person name="llama that changes color" age={2} color={this.state.color} change={this.colorChangeHandler}/>
+					<Person name={this.state.entities[0].name} age={this.state.entities[0].age} color={this.state.color}>
+						<button onClick={this.switchEntityHandler} style={buttonStyle}>Trip or help</button>
+						<br/>
+						{this.state.entities[0].state}
+					</Person>
+				</div>
+			)
+		}
+
         return (
             <div className="App">
                 <h1>Llamas</h1>
 				<button onClick={this.toggleLlamasHandler} style={buttonStyle}>{this.state.showLlamas ? "Hide Llamas" : "Show Llamas"}</button>
-				{this.state.showLlamas ?
-					<div>
-						<Person name="llama" age={2} color={this.state.color}>This is inside</Person>
-						<Person name="llama with changeable age" age={this.state.age} color={this.state.color} click={this.switchAgeHandler}/>
-						<Person name="llama that changes color" age={2} color={this.state.color} change={this.colorChangeHandler}/>
-						<Person name={this.state.entities[0].name} age={this.state.entities[0].age} color={this.state.color}>
-							<button onClick={this.switchEntityHandler} style={buttonStyle}>Trip or help</button>
-							<br/>
-							{this.state.entities[0].state}
-						</Person>
-					</div>
-					: null
-				}
+				{llamas}
             </div>
         );
     }
