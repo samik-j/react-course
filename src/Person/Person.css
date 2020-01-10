@@ -1,5 +1,7 @@
 /*This is global css, it's not scoped to Person.js
 It has to be imported in the Person.js file
+
+Having .Person ensures this can't be used in any other component
 */
 
 .Person {
