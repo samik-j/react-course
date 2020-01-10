@@ -62,7 +62,15 @@ class App extends React.Component {
 
     render() {
     	const buttonStyle = {
-			border: '1px solid black',
+			border: '2px solid green',
+			color: 'green',
+			padding: '8px',
+			margin: '5px',
+			cursor: 'pointer'
+		};
+
+    	const buttonStyle2 = {
+			border: '2px solid black',
 			padding: '8px',
 			margin: '5px',
 			cursor: 'pointer'
@@ -77,20 +85,23 @@ class App extends React.Component {
 					{this.state.entities.map((entity, index) => {
 					return <Person key={entity.id} name={entity.name} age={entity.age} color={entity.color} onClick={() => this.deleteLlamaHandler(index)}
 								   onChange={(event) => this.colorChangeLlamaHandler(event, entity.id)}>
-						<button onClick={() => this.switchEntityHandler(entity.id)} style={buttonStyle}>Trip or help</button>
+						<button onClick={() => this.switchEntityHandler(entity.id)} style={buttonStyle2}>Trip or help</button>
 						<br/>
 						{entity.state}
 					</Person>
 				})
 				}
 				</div>
-			)
+			);
+
+			buttonStyle.border = '2px solid red';
+			buttonStyle.color = 'red';
 		}
 
         return (
             <div className="App">
                 <h1>Llamas</h1>
-				<button onClick={this.toggleLlamasHandler} style={buttonStyle}>{this.state.showLlamas ? "Hide Llamas" : "Show Llamas"}</button>
+				<button style={buttonStyle} onClick={this.toggleLlamasHandler}>{this.state.showLlamas ? "Hide Llamas" : "Show Llamas"}</button>
 				{llamas}
             </div>
         );
