@@ -9,7 +9,8 @@ class App extends React.Component {
             {name: 'llama', movement: 'jumping', state: 'I am jumping happily', age: Math.floor(Math.random() * 20)},
         ],
         age: Math.floor(Math.random() * 20),
-		color: "blue"
+		color: "blue",
+		showLlamas: false
     };
 
     switchEntityHandler = () => {
@@ -27,16 +28,16 @@ class App extends React.Component {
         })
     };
 
-    switchSpecificAgeHandler = (newAge) => {
-        this.setState({
-            age: newAge
-        })
-    };
-
     colorChangeHandler = (event) => {
 		this.setState({
 			color: event.target.value
 		})
+	};
+
+    toggleLlamasHandler = () => {
+    	this.setState(previousState => ({
+			showLlamas: !previousState.showLlamas
+		}))
 	};
 
     render() {
@@ -49,22 +50,21 @@ class App extends React.Component {
 
         return (
             <div className="App">
-                <h1>React App</h1>
-                <Person name="llama" age={2} color={this.state.color}>This is inside</Person>
-                <Person name="llama with changeable age" age={this.state.age} color={this.state.color} click={this.switchAgeHandler}/>
-                <Person name="llama that changes color" age={2} color={this.state.color} change={this.colorChangeHandler}/>
-                {/*Passing argument to a function*/}
-                {/*When using arrow function a function is returned. It's an anonymous function which will be executed on click.
-                It can be inefficient as react might render too often, it's better to use bind syntax*/}
-                {/*<Person name="llama with changeable age" age={this.state.age} click={() => this.switchSpecificAgeHandler(4)}/>*/}
-                {/*<Person name="llama with changeable age" age={this.state.age} click={this.switchSpecificAgeHandler.bind(this, 5)}/>*/}
-                <Person name={this.state.entities[0].name} age={this.state.entities[0].age} color={this.state.color}>
-                    <button onClick={this.switchEntityHandler} style={buttonStyle}>Trip or help</button>
-                    <br/>
-                    {this.state.entities[0].state}
-                </Person>
-
-
+                <h1>Llamas</h1>
+				<button onClick={this.toggleLlamasHandler} style={buttonStyle}>{this.state.showLlamas ? "Hide Llamas" : "Show Llamas"}</button>
+				{this.state.showLlamas ?
+					<div>
+						<Person name="llama" age={2} color={this.state.color}>This is inside</Person>
+						<Person name="llama with changeable age" age={this.state.age} color={this.state.color} click={this.switchAgeHandler}/>
+						<Person name="llama that changes color" age={2} color={this.state.color} change={this.colorChangeHandler}/>
+						<Person name={this.state.entities[0].name} age={this.state.entities[0].age} color={this.state.color}>
+							<button onClick={this.switchEntityHandler} style={buttonStyle}>Trip or help</button>
+							<br/>
+							{this.state.entities[0].state}
+						</Person>
+					</div>
+					: null
+				}
             </div>
         );
     }
