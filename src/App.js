@@ -6,16 +6,23 @@ class App extends React.Component {
 
     state = {
         entities: [
-            {name: 'llama', movement: 'jumping', state: 'I am jumping happily'},
-        ]
+            {name: 'llama', movement: 'jumping', state: 'I am jumping happily', age: Math.floor(Math.random() * 20)},
+        ],
+        age: Math.floor(Math.random() * 20)
     };
 
     switchEntityHandler = () => {
         const newState = this.state.entities[0].state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
         this.setState({
             entities: [
-                {name: 'llama', movement: 'jumping', state: newState},
+                {name: 'llama', movement: 'jumping', state: newState, age: this.state.entities[0].age},
             ]
+        })
+    };
+
+    switchAgeHandler = () => {
+        this.setState({
+            age: Math.floor(Math.random() * 20)
         })
     };
 
@@ -23,9 +30,10 @@ class App extends React.Component {
         return (
             <div className="App">
                 <h1>React App</h1>
+                <Person name="llama" age={2}>This is inside</Person>
+                <Person name="llama with changeable age" age={this.state.age} click={this.switchAgeHandler}></Person>
                 <button onClick={this.switchEntityHandler}>Trip or help</button>
-                <Person name="llama">This is inside</Person>
-                <Person name={this.state.entities[0].name}>{this.state.entities[0].state}</Person>
+                <Person name={this.state.entities[0].name} age={this.state.entities[0].age}>{this.state.entities[0].state}</Person>
             </div>
         );
     }
