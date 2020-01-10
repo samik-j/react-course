@@ -1,0 +1,11 @@
+/*This is global css, it's not scoped to Person.js
+It has to be imported in the Person.js file
+*/
+
+.Person {
+    width: 40%;
+    border: 1px solid #eeeeee;
+    padding:20px;
+    margin: auto auto 50px;
+    text-align: center;
+}
