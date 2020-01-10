@@ -26,14 +26,30 @@ class App extends React.Component {
         })
     };
 
+    switchSpecificAgeHandler = (newAge) => {
+        this.setState({
+            age: newAge
+        })
+    };
+
     render() {
         return (
             <div className="App">
                 <h1>React App</h1>
                 <Person name="llama" age={2}>This is inside</Person>
-                <Person name="llama with changeable age" age={this.state.age} click={this.switchAgeHandler}></Person>
-                <button onClick={this.switchEntityHandler}>Trip or help</button>
-                <Person name={this.state.entities[0].name} age={this.state.entities[0].age}>{this.state.entities[0].state}</Person>
+                <Person name="llama with changeable age" age={this.state.age} click={this.switchAgeHandler}/>
+                {/*Passing argument to a function*/}
+                {/*When using arrow function a function is returned. It's an anonymous function which will be executed on click.
+                It can be inefficient as react might render too often, it's better to use bind syntax*/}
+                {/*<Person name="llama with changeable age" age={this.state.age} click={() => this.switchSpecificAgeHandler(4)}/>*/}
+                {/*<Person name="llama with changeable age" age={this.state.age} click={this.switchSpecificAgeHandler.bind(this, 5)}/>*/}
+                <Person name={this.state.entities[0].name} age={this.state.entities[0].age}>
+                    <button onClick={this.switchEntityHandler}>Trip or help</button>
+                    <br/>
+                    {this.state.entities[0].state}
+                </Person>
+
+
             </div>
         );
     }
