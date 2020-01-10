@@ -6,20 +6,27 @@ class App extends React.Component {
 
     state = {
         entities: [
-            {name: 'llama', movement: 'jumping', state: 'I am jumping happily', age: Math.floor(Math.random() * 20)},
+            {id: '1', name: 'llama', movement: 'jumping', state: 'I am jumping happily', age: Math.floor(Math.random() * 20), color: 'blue'},
+            {id: '2', name: 'other llama', movement: 'jumping', state: 'I am jumping happily', age: Math.floor(Math.random() * 20), color: 'blue'},
+            {id: '3', name: 'some llama', movement: 'jumping', state: 'I am jumping happily', age: Math.floor(Math.random() * 20), color: 'blue'}
         ],
         age: Math.floor(Math.random() * 20),
-		color: "blue",
 		showLlamas: false
     };
 
-    switchEntityHandler = () => {
-        const newState = this.state.entities[0].state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
+    switchEntityHandler = (id) => {
+    	const index = this.state.entities.findIndex(entity => entity.id === id);
+		const entity = {...this.state.entities[index]};
+
+		const newState = entity.state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
+		entity.state = newState;
+		const entities = [...this.state.entities];
+		entities[index] = entity;
+
         this.setState({
-            entities: [
-                {name: 'llama', movement: 'jumping', state: newState, age: this.state.entities[0].age},
-            ]
-        })
+            entities: entities
+        });
+		console.log("change")
     };
 
     switchAgeHandler = () => {
@@ -28,9 +35,16 @@ class App extends React.Component {
         })
     };
 
-    colorChangeHandler = (event) => {
+    colorChangeLlamaHandler = (event, id) => {
+    	const index = this.state.entities.findIndex(entity => entity.id === id);
+    	const entity = {...this.state.entities[index]}; //copy properties of the object, instead of modifying the object in state. ALWAYS WORK WITH COPIES FROM THE STATE WHEN UPDATING
+		entity.color = event.target.value;
+
+		const entities = [...this.state.entities];
+		entities[index] = entity;
+
 		this.setState({
-			color: event.target.value
+			entities: entities
 		})
 	};
 
@@ -38,6 +52,12 @@ class App extends React.Component {
     	this.setState(previousState => ({
 			showLlamas: !previousState.showLlamas
 		}))
+	};
+
+    deleteLlamaHandler = (index) => {
+    	const entities = [...this.state.entities]; //this copies the list of elements from state, not the list from state
+    	entities.splice(index, 1);
+    	this.setState( {entities: entities})
 	};
 
     render() {
@@ -52,14 +72,17 @@ class App extends React.Component {
     	if (this.state.showLlamas) {
 			llamas = (
 				<div>
-					<Person name="llama" age={2} color={this.state.color}>This is inside</Person>
-					<Person name="llama with changeable age" age={this.state.age} color={this.state.color} click={this.switchAgeHandler}/>
-					<Person name="llama that changes color" age={2} color={this.state.color} change={this.colorChangeHandler}/>
-					<Person name={this.state.entities[0].name} age={this.state.entities[0].age} color={this.state.color}>
-						<button onClick={this.switchEntityHandler} style={buttonStyle}>Trip or help</button>
+					<Person name="llama" age={2} color="red">This is inside</Person>
+					<Person name="llama with changeable age" age={this.state.age} color="black" click={this.switchAgeHandler}/>
+					{this.state.entities.map((entity, index) => {
+					return <Person key={entity.id} name={entity.name} age={entity.age} color={entity.color} click={() => this.deleteLlamaHandler(index)}
+								   change={(event) => this.colorChangeLlamaHandler(event, entity.id)}>
+						<button onClick={() => this.switchEntityHandler(entity.id)} style={buttonStyle}>Trip or help</button>
 						<br/>
-						{this.state.entities[0].state}
+						{entity.state}
 					</Person>
+				})
+				}
 				</div>
 			)
 		}
