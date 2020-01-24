@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Llama from './Llamas/Llama/Llama'
 
 class AppClassComponent extends React.Component {
 
     state = {
-        entities: [
+        llamas: [
             {name: 'llama', movement: 'jumping', state: 'I am jumping happily'},
         ]
     };
 
-    switchEntityHandler = () => {
-        const newState = this.state.entities[0].state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
+    switchLlamaHandler = () => {
+        const newState = this.state.llamas[0].state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
         this.setState({
-            entities: [
+            llamas: [
                 {name: 'llama', movement: 'jumping', state: newState},
             ]
         })
@@ -23,9 +23,9 @@ class AppClassComponent extends React.Component {
         return (
             <div className="App">
                 <h1>React App</h1>
-                <button onClick={this.switchEntityHandler}>Trip or help</button>
-                <Person name="llama">This is inside</Person>
-                <Person name={this.state.entities[0].name}>{this.state.entities[0].state}</Person>
+                <button onClick={this.switchLlamaHandler}>Trip or help</button>
+                <Llama name="llama">This is inside</Llama>
+                <Llama name={this.state.llamas[0].name}>{this.state.llamas[0].state}</Llama>
             </div>
         );
     }

@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Llama from './Llamas/Llama/Llama'
 
 const AppFunctionalComponentWithHooks = props => {
     // useState returns an array of two things. First one is the state, second one is a function to be used when changing the state
     // this is destructuring so i can specify the names for the two things that get returned
-    const [ entitiesState, setEntitiesState ] = useState({
-        entities: [
+    const [ llamasState, setLlamasState ] = useState({
+        llamas: [
             {name: "llama", movement: "jumping", state: "I am jumping happily"},
             {name: "other llama", movement: "jumping", state: "I am jumping happily"}
         ]
     });
 
-    // if otherStateThingy was in entitiesState then it would be erased on setEntitiesState (if it doesn't set it) that has only entities inside
+    // if otherStateThingy was in llamasState then it would be erased on setllamasState (if it doesn't set it) that has only llamas inside
     // so one state per "property"
     const [ otherStateThingy, setOtherStateThingy ] = useState({
         otherStateThingy: "other thingy"
     });
 
-    const switchEntityHandler = () => {
-        const newState = entitiesState.entities[0].state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
+    const switchLlamaHandler = () => {
+        const newState = llamasState.llamas[0].state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
         // setState does not keep old state, it will completely override everything, so you need to pass the old state
         // so i should have multiple useState, one for each object/each "slice" of state that we want to update
-        setEntitiesState({
-            entities: [
+        setLlamasState({
+            llamas: [
                 {name: 'llama', movement: 'jumping', state: newState},
-                {name: entitiesState.entities[1].name, movement: 'jumping', state: entitiesState.entities[1].state}
+                {name: llamasState.llamas[1].name, movement: 'jumping', state: llamasState.llamas[1].state}
             ]
         })
     };
@@ -33,10 +33,10 @@ const AppFunctionalComponentWithHooks = props => {
     return (
         <div className="App">
             <h1>React App</h1>
-            <button onClick={switchEntityHandler}>Trip or help</button>
-            <Person name="llama">This is inside</Person>
-            <Person name={entitiesState.entities[0].name}>{entitiesState.entities[0].state}</Person>
-            <Person name={entitiesState.entities[1].name}>{entitiesState.entities[1].state}</Person>
+            <button onClick={switchLlamaHandler}>Trip or help</button>
+            <Llama name="llama">This is inside</Llama>
+            <Llama name={llamasState.llamas[0].name}>{llamasState.llamas[0].state}</Llama>
+            <Llama name={llamasState.llamas[1].name}>{llamasState.llamas[1].state}</Llama>
             <p>{otherStateThingy.otherStateThingy}</p>
         </div>
     );

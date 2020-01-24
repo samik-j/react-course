@@ -1,0 +1,13 @@
+/*This is global css, it's not scoped to Llama.js
+It has to be imported in the Llama.js file
+
+Having .Llama ensures this can't be used in any other component
+*/
+
+.Llama {
+    width: 40%;
+    border: 1px solid #eeeeee;
+    padding:20px;
+    margin: auto auto 50px;
+    text-align: center;
+}
