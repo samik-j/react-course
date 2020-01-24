@@ -1,6 +1,7 @@
 import React from 'react';
 import Llama from "./Llama/Llama";
 import Button from "../Button/Button";
+import Radium from 'radium'
 
 const llamas = ({llamas, onClick, onButtonClick, onChange}) => {
 
@@ -28,4 +29,4 @@ const llamas = ({llamas, onClick, onButtonClick, onChange}) => {
 	)
 };
 
-export default llamas;
+export default Radium(llamas);
