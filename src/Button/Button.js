@@ -16,7 +16,6 @@ const button = ({onClick, key, text, color, clickColor}) => {
 			backgroundColor: buttonColor,
 			color: "white"
 		},
-		transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
 		":focus": {
 			outline: 0
 		},
