@@ -3,23 +3,23 @@ import Radium from 'radium'
 
 const button = ({onClick, key, text, color, clickColor}) => {
 
-	const buttonColor = color ? color : "darkgreen";
-	const buttonClickColor = clickColor ? clickColor : "#1B3A19";
+	const buttonColor = color ? color : 'darkgreen';
+	const buttonClickColor = clickColor ? clickColor : '#1B3A19';
 
 	const style = {
-		border: "2px solid",
+		border: '2px solid',
 		borderColor: buttonColor,
-		padding: "8px",
-		margin: "5px",
-		cursor: "pointer",
-		":hover": {
+		padding: '8px',
+		margin: '5px',
+		cursor: 'pointer',
+		':hover': {
 			backgroundColor: buttonColor,
-			color: "white"
+			color: 'white'
 		},
-		":focus": {
+		':focus': {
 			outline: 0
 		},
-		":active": {
+		':active': {
 			backgroundColor: buttonClickColor,
 			borderColor: buttonClickColor
 		}
