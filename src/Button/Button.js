@@ -1,0 +1,34 @@
+import React from 'react';
+import Radium from 'radium'
+
+const button = ({onClick, key, text, color, clickColor}) => {
+
+	const buttonColor = color ? color : "darkgreen";
+	const buttonClickColor = clickColor ? clickColor : "#1B3A19";
+
+	const style = {
+		border: "2px solid",
+		borderColor: buttonColor,
+		padding: "8px",
+		margin: "5px",
+		cursor: "pointer",
+		":hover": {
+			backgroundColor: buttonColor,
+			color: "white"
+		},
+		transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+		":focus": {
+			outline: 0
+		},
+		":active": {
+			backgroundColor: buttonClickColor,
+			borderColor: buttonClickColor
+		}
+	};
+
+	return (
+		<button key={key} onClick={onClick} style={style}>{text}</button>
+	)
+};
+
+export default Radium(button);

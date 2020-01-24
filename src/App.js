@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Radium from 'radium'
 import Person from './Person/Person'
+import Button from "./Button/Button";
 
 class App extends React.Component {
 
@@ -96,6 +97,8 @@ class App extends React.Component {
 					return <Person key={entity.id} name={entity.name} age={entity.age} color={entity.color} onClick={() => this.deleteLlamaHandler(index)}
 								   onChange={(event) => this.colorChangeLlamaHandler(event, entity.id)}>
 						<button key={entity.id} onClick={() => this.switchEntityHandler(entity.id)} style={buttonStyle2}>Trip or help</button>
+						<Button key={entity.id} onClick={() => this.switchEntityHandler(entity.id)} color='darkblue' clickColor='#050041' text='Trip or help'/>
+						<Button key={entity.id} onClick={() => this.switchEntityHandler(entity.id)} text='Trip or help'/>
 						<br/>
 						{entity.state}
 					</Person>
