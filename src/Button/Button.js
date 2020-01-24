@@ -7,7 +7,8 @@ const button = ({onClick, key, text, color, clickColor}) => {
 	const buttonClickColor = clickColor ? clickColor : '#1B3A19';
 
 	const style = {
-		border: '2px solid',
+		borderWidth: '2px',
+		borderStyle: 'solid',
 		borderColor: buttonColor,
 		padding: '8px',
 		margin: '5px',
