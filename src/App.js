@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import Radium from 'radium'
 import Llama from './Llamas/Llama/Llama'
-import Button from './Button/Button';
+import Llamas from './Llamas/Llamas';
+import Cockpit from './Cockpit/Cockpit';
 
 class App extends React.Component {
 
@@ -39,14 +40,14 @@ class App extends React.Component {
 
     colorChangeLlamaHandler = (event, id) => {
     	const index = this.state.llamas.findIndex(entity => entity.id === id);
-    	const entity = {...this.state.llamas[index]}; //copy properties of the object, instead of modifying the object in state. ALWAYS WORK WITH COPIES FROM THE STATE WHEN UPDATING
-		entity.color = event.target.value;
+    	const llama = {...this.state.llamas[index]}; //copy properties of the object, instead of modifying the object in state. ALWAYS WORK WITH COPIES FROM THE STATE WHEN UPDATING
+		llama.color = event.target.value;
 
-		const entities = [...this.state.llamas];
-		entities[index] = entity;
+		const llamas = [...this.state.llamas];
+		llamas[index] = llama;
 
 		this.setState({
-			llamas: entities
+			llamas: llamas
 		})
 	};
 
@@ -63,69 +64,20 @@ class App extends React.Component {
 	};
 
     render() {
-    	const buttonStyle = {
-			border: '2px solid green',
-			color: 'green',
-			padding: '8px',
-			margin: '5px',
-			cursor: 'pointer',
-			// hover and any :sth are pseudo-selectors. To be able to use them in in-line style use radium
-			':hover': {
-				backgroundColor:'green',
-				color: 'white'
-			}
-		};
-
-    	const buttonStyle2 = {
-			border: '2px solid black',
-			padding: '8px',
-			margin: '5px',
-			cursor: 'pointer',
-			':hover': {
-				backgroundColor:'black',
-				color: 'white'
-			}
-		};
-
     	let llamas = null;
     	if (this.state.showLlamas) {
 			llamas = (
 				<div>
 					<Llama name="llama" age={2} color="red">This is inside</Llama>
 					<Llama name="llama with changeable age" age={this.state.age} color="black" onClick={this.switchAgeHandler}/>
-					{this.state.llamas.map((entity, index) => {
-						return <Llama key={entity.id} name={entity.name} age={entity.age} color={entity.color} onClick={() => this.deleteLlamaHandler(index)}
-									  onChange={(event) => this.colorChangeLlamaHandler(event, entity.id)}>
-							<button key={entity.id} onClick={() => this.switchLlamaStateHandler(entity.id)} style={buttonStyle2}>Trip or help</button>
-							<Button key={entity.id} onClick={() => this.switchLlamaStateHandler(entity.id)} color='darkblue' clickColor='#050041' text='Trip or help'/>
-							<Button key={entity.id} onClick={() => this.switchLlamaStateHandler(entity.id)} text='Trip or help'/>
-							<p>{entity.state}</p>
-						</Llama>
-					})}
+					<Llamas llamas={this.state.llamas} onClick={this.deleteLlamaHandler} onButtonClick={this.switchLlamaStateHandler} onChange={this.colorChangeLlamaHandler}/>
 				</div>
 			);
-
-			buttonStyle.border = '2px solid red';
-			buttonStyle.color = 'red';
-			buttonStyle[':hover'] = {
-				backgroundColor: 'red',
-				color: 'white'
-
-			}
 		}
-
-    	let style = [];
-    	if(this.state.llamas.length <= 2) {
-    		style.push('dark-red')
-    	}
-    	if(this.state.llamas.length <= 1) {
-    		style.push('red')
-    	}
 
         return (
             <div className="App">
-                <h1 className={style.join(' ')}>Llamas</h1>
-				<button style={buttonStyle} onClick={this.toggleLlamasHandler}>{this.state.showLlamas ? "Hide Llamas" : "Show Llamas"}</button>
+				<Cockpit showLlamas={this.state.showLlamas} llamasLength={this.state.llamas.length} onClick={this.toggleLlamasHandler}/>
 				{llamas}
             </div>
         );

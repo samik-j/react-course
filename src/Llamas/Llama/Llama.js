@@ -7,7 +7,7 @@ const llama = ({name, age, color, children, onClick, onChange}) => {
 			<p onClick={onClick}>{name} here and I am {age} years old, I am {color}</p>
 			<input type="text" onChange={onChange} value={color}/>
 			{/*if it's (props) then this is props.children, children is a reserved keyword*/}
-			{children}
+			<div>{children}</div>
 		</div>
 	)
 };
