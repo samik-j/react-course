@@ -3,8 +3,6 @@ import './App.css';
 import Radium from 'radium'
 import Person from './Person/Person'
 import Button from "./Button/Button";
-import ErrorBoundary from './ErrorBonundary/ErrorBoundary';
-import ErrorComponent from "./ErrorBonundary/ErrorComponent";
 
 class App extends React.Component {
 
@@ -126,9 +124,6 @@ class App extends React.Component {
 
         return (
             <div className="App">
-				<ErrorBoundary>
-					<ErrorComponent/>
-				</ErrorBoundary>
                 <h1 className={style.join(' ')}>Llamas</h1>
 				<button style={buttonStyle} onClick={this.toggleLlamasHandler}>{this.state.showLlamas ? "Hide Llamas" : "Show Llamas"}</button>
 				{llamas}
