@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Radium from 'radium'
 import './Cockpit.css';
 
@@ -16,6 +16,12 @@ const cockpit = ({showLlamas, llamasLength, onClick}) => {
 			color: 'white'
 		}
 	};
+
+	// First arg is function what to do
+	// Second arg is an array pointing to when to trigger, so now only when llamas change (without it it would trigger on any change)
+	useEffect(() => {
+		alert('re-rendering')
+	}, [llamasLength]);
 
 	let style = [];
 	if(llamasLength <= 2) {
