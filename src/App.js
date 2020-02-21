@@ -7,6 +7,13 @@ import Cockpit from './Cockpit/Cockpit';
 
 class App extends React.Component {
 
+	// If you want to set initial state based on props do it in the constructor
+	constructor(props) {
+		super(props);
+		console.log('This is constructor')
+	}
+
+	// Behind the scenes this adds constructor
     state = {
         llamas: [
             {id: '1', name: 'llama', movement: 'jumping', state: 'I am jumping happily', age: Math.floor(Math.random() * 20), color: 'blue'},
@@ -21,8 +28,7 @@ class App extends React.Component {
     	const index = this.state.llamas.findIndex(entity => entity.id === id);
 		const entity = {...this.state.llamas[index]};
 
-		const newState = entity.state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
-		entity.state = newState;
+		entity.state = entity.state === 'I am jumping happily' ? 'I fell down' : 'I am jumping happily';
 		const entities = [...this.state.llamas];
 		entities[index] = entity;
 
@@ -77,6 +83,7 @@ class App extends React.Component {
 
         return (
             <div className="App">
+				<h1>{this.props.title}</h1>
 				<Cockpit showLlamas={this.state.showLlamas} llamasLength={this.state.llamas.length} onClick={this.toggleLlamasHandler}/>
 				{llamas}
             </div>
