@@ -13,6 +13,11 @@ class App extends React.Component {
 		console.log('This is constructor')
 	}
 
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	// Can compare current props/state with nextProps/State and decide if it should update
+	// 	return true;
+	// }
+
 	// Behind the scenes this adds constructor
     state = {
         llamas: [
